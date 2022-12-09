@@ -64,3 +64,23 @@ LT - ISO country code.
 kk - check digits calculated from the rest of the IBAn characters.
 b - national bank code
 c - account number
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Example
+In this example, the above algorithm for D mod 97 will be applied to D = 3214282912345698765432161182. 
+The digits are colour-coded to aid the description below.) If the result is one, the IBAN corresponding to D passes the check digit test.
+
+Construct N from the first 9 digits of D
+N = 321428291
+Calculate N mod 97 = 70
+Construct a new 9-digit N from the above result (step 2) followed by the next 7 digits of D.
+N = 702345698
+Calculate N mod 97 = 29
+Construct a new 9-digit N from the above result (step 4) followed by the next 7 digits of D.
+N = 297654321
+Calculate N mod 97 = 24
+Construct a new N from the above result (step 6) followed by the remaining 5 digits of D.
+N = 2461182
+Calculate N mod 97 = 1
+From step 8, the final result is D mod 97 = 1 and the IBAN has passed this check digit test.
