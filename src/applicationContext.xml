@@ -8,13 +8,8 @@
     http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Define your beans here -->
-    <bean id="myCoach"
-    	class="com.arnaskundrotas.codedemov001.TrackCoach">
+    <bean 	id="myCoach"
+    		class="com.arnaskundrotas.codedemov001.TrackCoach">
     </bean>
     
 </beans>
-
-
-
-
-
