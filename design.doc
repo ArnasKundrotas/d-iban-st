@@ -9,11 +9,16 @@ Validating the IBAN
 
 An IBAN is validated by converting it into an integer and performing a basic mod-97 operation (as described in ISO 7064) on it. If the IBAN is valid, the remainder equals 1.
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+I. VALIDATING IBAN
+
 1. Check that the total IBAN length is correct as per the country. If not, the IBAN is invalid.
 2. Move the four initial characters to the end of the string.
 3. Replace each letter in the string with two digits, thereby expanding the string, where A = 10, B = 11, ..., Z = 35.
 4. Interpret the string as a decimal integer and compute the remainder of that number on division by 97.
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+NOTE:
 If the remainder is 1, the check digit test is passed and the IBAN might be valid.
 
 Example (fictitious United Kingdom bank, sort code 12-34-56, account number 98765432):
@@ -22,3 +27,40 @@ Example (fictitious United Kingdom bank, sort code 12-34-56, account number 9876
 • Rearrange:			W E S T12345698765432 G B82	
 • Convert to integer:		3214282912345698765432161182	
 • Compute remainder:		3214282912345698765432161182	mod 97 = 1
+
+Generating IBAN check digits.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+II. GENERATING IBAN CHECK DIGITS
+
+The preferred algorithm is:
+1. Check that the total IBAN length is correct as per the country. If not, the IBAN is invalid.
+2. Replace the two check digits by 00 (e.g., GB00 for the UK).
+3. Move the four initial characters to the end of the string.
+4. Replace the letters in the string with digits, expanding the string as necessary, such that A or a = 10, B or b = 11, and Z or z = 35. Each alphabetic character is therefore replaced by 2 digits
+5. Convert the string to an integer (i.e. ignore leading zeroes).
+6. Calculate mod-97 of the new number, which results in the remainder.
+7. Subtract the remainder from 98 and use the result for the two check digits. If the result is a single-digit number, pad it with a leading 0 to make a two-digit number.
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Modulo operation on IBAN
+
+Piece-wise calculation D mod 97 can be done in many ways. One such way is as follows:
+
+1. Starting from the leftmost digit of D, construct a number using the first 9 digits and call it N.
+2. Calculate N mod 97.
+3. Construct a new 9-digit N by concatenating the above result (step 2) with the next 7 digits of D. 
+If there are fewer than 7 digits remaining in D but at least one, then construct a new N, which will have less than 9 digits, from the above result (step 2) followed by the remaining digits of D
+4. Repeat steps 2–3 until all the digits of D have been processed.
+
+The result of the final calculation in step 2 will be D mod 97 = N mod 97.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Lthuanian IBAN LTkk bbbb bccc cccc cccc
+
+LT - ISO country code.
+kk - check digits calculated from the rest of the IBAn characters.
+b - national bank code
+c - account number
