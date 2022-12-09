@@ -1,4 +1,4 @@
-package com.arnaskundrotas.springrestservice.controller;
+package com.arnaskundrotas.springrestservice;
 
 import java.util.concurrent.atomic.AtomicLong;
 
