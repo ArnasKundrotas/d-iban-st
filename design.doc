@@ -1,0 +1,24 @@
+Your task is to create a REST endpoint on Java Spring Framework to validate IBAN(International Bank Account Number) code.
+Your application should accept IBAN code, and return response with the answer(IBAN is valid or not).
+How IBAN codes are being verified is described on the Wiki page(there is example as well).
+https://en.wikipedia.org/wiki/International_Bank_Account_Number
+
+Please provide the link in git to your solution, and send archive with the code as well if you put your code into external code repo(we can't clone code from the external sources on internal PC).
+
+Validating the IBAN
+
+An IBAN is validated by converting it into an integer and performing a basic mod-97 operation (as described in ISO 7064) on it. If the IBAN is valid, the remainder equals 1.
+
+1. Check that the total IBAN length is correct as per the country. If not, the IBAN is invalid.
+2. Move the four initial characters to the end of the string.
+3. Replace each letter in the string with two digits, thereby expanding the string, where A = 10, B = 11, ..., Z = 35.
+4. Interpret the string as a decimal integer and compute the remainder of that number on division by 97.
+
+If the remainder is 1, the check digit test is passed and the IBAN might be valid.
+
+Example (fictitious United Kingdom bank, sort code 12-34-56, account number 98765432):
+
+• IBAN:				GB82 WEST 1234 5698 7654 32	
+• Rearrange:			W E S T12345698765432 G B82	
+• Convert to integer:		3214282912345698765432161182	
+• Compute remainder:		3214282912345698765432161182	mod 97 = 1
