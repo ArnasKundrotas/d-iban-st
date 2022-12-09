@@ -1,10 +1,10 @@
-package com.arnaskundrotas.springbootibanvalidator;
+package com.codacum.springboothelloworld;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBootIbanValidatorApplicationTests {
+class SpringBootHelloWorldApplicationTests {
 
 	@Test
 	void contextLoads() {

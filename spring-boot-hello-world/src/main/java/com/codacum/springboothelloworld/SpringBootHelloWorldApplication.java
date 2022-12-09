@@ -1,13 +1,13 @@
-package com.arnaskundrotas.springbootibanvalidator;
+package com.codacum.springboothelloworld;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootIbanValidatorApplication {
+public class SpringBootHelloWorldApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootIbanValidatorApplication.class, args);
+		SpringApplication.run(SpringBootHelloWorldApplication.class, args);
 	}
 
 }
